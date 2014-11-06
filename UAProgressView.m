@@ -142,7 +142,7 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 #pragma mark - Progress Control
 
 - (void)setProgress:(float)progress animated:(BOOL)animated {
-    
+	NSLog( @"%@", @(progress) );
 	progress = MAX( MIN(progress, 1.0), 0.0); // keep it between 0 and 1
 	
 	if (_progress == progress) {
