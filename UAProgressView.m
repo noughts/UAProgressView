@@ -95,7 +95,7 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 	
 	//アニメーションの開始と終了の値を設定
 	animation.fromValue = @(1);
-	animation.toValue = @(0.66);
+	animation.toValue = @(0.5);
 	animation.removedOnCompletion = NO;
 	animation.fillMode = kCAFillModeForwards;
 	
