@@ -80,6 +80,59 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 	[self addGestureRecognizer:gestureRecognizer];
 }
 
+
+
+
+
+#pragma mark - public method
+
+-(void)startBlink{
+	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+	animation.duration = 0.1;
+	animation.repeatCount = INT_MAX;
+	animation.autoreverses = NO;
+//	animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+	
+	//アニメーションの開始と終了の値を設定
+	animation.fromValue = @(1);
+	animation.toValue = @(0.66);
+	animation.removedOnCompletion = NO;
+	animation.fillMode = kCAFillModeForwards;
+	
+	//アニメーションキーを設定（任意の名前）
+	[self.progressView.layer addAnimation:animation forKey:@"blink"];
+}
+
+-(void)stopBlink{
+	[self.progressView.layer removeAnimationForKey:@"blink"];
+}
+
+
+-(void)hideAnimated:(BOOL)animated{
+	if( !animated ){
+		self.hidden = YES;
+		[self stopAnimation];
+		[self stopBlink];
+		return;
+	}
+	
+	[UIView animateWithDuration:0.25 animations:^{
+		self.alpha = 0;
+	} completion:^(BOOL finished) {
+		self.hidden = YES;
+		[self stopAnimation];
+		[self stopBlink];
+	}];
+}
+
+
+
+
+
+
+
+
+
 #pragma mark - Public Accessors
 
 
@@ -142,7 +195,7 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 #pragma mark - Progress Control
 
 - (void)setProgress:(float)progress animated:(BOOL)animated {
-	NSLog( @"%@", @(progress) );
+	
 	progress = MAX( MIN(progress, 1.0), 0.0); // keep it between 0 and 1
 	
 	if (_progress == progress) {

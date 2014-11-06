@@ -10,6 +10,9 @@
 
 @interface UAProgressView : UIView
 
+-(void)startBlink;
+-(void)stopBlink;
+
 /**
  *  Called when the progress view is filled with tintColor, or removed
  *

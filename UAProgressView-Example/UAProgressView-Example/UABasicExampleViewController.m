@@ -40,6 +40,7 @@
 
 - (void)setupProgressView1 {
 	// no-op. Default
+	[self.progressView1 startBlink];
 }
 
 - (void)setupProgressView2 {
