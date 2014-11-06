@@ -7,7 +7,7 @@ UAProgressView is a simple and lightweight, yet powerful animated circular progr
 Installation is made simple with [Cocoapods](http://cocoapods.org/). If you want to do it the old fashioned way, just add `UAProgressView.h` and `UAProgressView.m` into your project.
 
 ```ruby
-pod 'UAProgressView'
+pod "UAProgressView", :git => 'https://github.com/noughts/UAProgressView.git'
 ```
 
 Then, simply place this line in any file that uses UAProgressView.
@@ -17,7 +17,7 @@ Then, simply place this line in any file that uses UAProgressView.
 ```
 
 UAProgressView works on iOS 6.0 and up.
-   
+
 ## Usage
 
 ### Simple Setup
@@ -32,7 +32,7 @@ The progress should be a `float` between 0 and 1, but we will round to the close
 The default color used for UAProgressView is the view's `tintColor`, and it will travel up the superview tree as expected to set it.
 
 --
-    
+
 ### Custom Setup
 
 There are many different configuration options to setup UAProgressView the way you want it.
@@ -49,9 +49,9 @@ There is no central view setup by default.
 ```objc
 @property (nonatomic, strong) UIView *centralView;
 ```
-    
+
 Example usage:
- 
+
 ```objc
 UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60.0, 32.0)];
 textLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32];
@@ -68,13 +68,13 @@ Border width is the thickness of the outer circle. It is set to 1.0 by default.
 ```objc
 @property (nonatomic, assign) CGFloat borderWidth;
 ```
-    
+
 Example usage:
 
 ```objc
 self.progressView.borderWidth = 2.0;
 ```
-    
+
 ##### Line Width
 
 Line width is the thickness of the inner circle. It is set to 1.0 by default.
@@ -82,7 +82,7 @@ Line width is the thickness of the inner circle. It is set to 1.0 by default.
 ```objc
 @property (nonatomic, assign) CGFloat lineWidth;
 ```
-    
+
 Example usage:
 
 ```objc
@@ -103,7 +103,7 @@ Example usage:
 ```objc
 self.progressView.fillOnTouch = YES;
 ```
-    
+
 
 #### Animation Duration
 

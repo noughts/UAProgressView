@@ -41,6 +41,7 @@
 - (void)setupProgressView1 {
 	// no-op. Default
 	[self.progressView1 startBlink];
+	self.progressView1.tintColor = [UIColor blackColor];
 }
 
 - (void)setupProgressView2 {
