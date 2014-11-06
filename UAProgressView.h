@@ -12,6 +12,7 @@
 
 -(void)startBlink;
 -(void)stopBlink;
+-(void)hideAnimated:(BOOL)animated;
 
 /**
  *  Called when the progress view is filled with tintColor, or removed
