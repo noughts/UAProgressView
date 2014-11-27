@@ -20,7 +20,6 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 @interface UAProgressView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UACircularProgressView *progressView;
-@property (nonatomic, strong) NSTimer *valueLabelUpdateTimer;
 
 @end
 
@@ -246,12 +245,6 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 - (void)stopAnimation {
     // Stop running animation
     [self.progressView.layer removeAnimationForKey:UAProgressViewProgressAnimationKey];
-    
-    // Stop timer
-	if( self.valueLabelUpdateTimer ){
-		[self.valueLabelUpdateTimer invalidate];
-		self.valueLabelUpdateTimer = nil;
-	}
 }
 
 
@@ -299,8 +292,6 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     [self.progressView updateProgress:_progress];
-    [self.valueLabelUpdateTimer invalidate];
-    self.valueLabelUpdateTimer = nil;
 }
 
 #pragma mark - Gesture Recognizers
