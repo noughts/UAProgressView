@@ -20,7 +20,6 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
 @interface UAProgressView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UACircularProgressView *progressView;
-@property (nonatomic, assign) int valueLabelProgressPercentDifference;
 @property (nonatomic, strong) NSTimer *valueLabelUpdateTimer;
 
 @end
@@ -240,17 +239,7 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
     animation.toValue = @(progress);
     animation.delegate = self;
     [self.progressView.layer addAnimation:animation forKey:UAProgressViewProgressAnimationKey];
-    
-    // Add timer to update valueLabel
-	_valueLabelProgressPercentDifference = (progress - self.progress) * 100;
-    CFTimeInterval timerInterval =  self.animationDuration / ABS(_valueLabelProgressPercentDifference);
-    self.valueLabelUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:timerInterval
-                                                                  target:self
-                                                                selector:@selector(onValueLabelUpdateTimer:)
-                                                                userInfo:nil
-                                                                 repeats:YES];
-    
-    
+	
     _progress = progress;
 }
 
@@ -259,17 +248,12 @@ NSString * const UAProgressViewProgressAnimationKey = @"UAProgressViewProgressAn
     [self.progressView.layer removeAnimationForKey:UAProgressViewProgressAnimationKey];
     
     // Stop timer
-    [self.valueLabelUpdateTimer invalidate];
-    self.valueLabelUpdateTimer = nil;
+	if( self.valueLabelUpdateTimer ){
+		[self.valueLabelUpdateTimer invalidate];
+		self.valueLabelUpdateTimer = nil;
+	}
 }
 
-- (void)onValueLabelUpdateTimer:(NSTimer *)timer {
-    if (_valueLabelProgressPercentDifference > 0) {
-        _valueLabelProgressPercentDifference--;
-    } else {
-        _valueLabelProgressPercentDifference++;
-    }
-}
 
 #pragma mark - Highlighting
 
